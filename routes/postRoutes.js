@@ -11,14 +11,16 @@ const {
 const Post = require('../models/postModel');
 const router = express.Router();
 
-router.get('/posts/search', searchPosts);
-router.get('/posts', getAllPosts);
-router.get('/posts/:id', getPostById);
-router.post('/posts', createPost);
-router.put('/posts/:id', updatePost);
-router.delete('/posts/:id', deletePost);
+// Agora as rotas usam prefixo relativo (sem /posts)
+router.get('/search', searchPosts);
+router.get('/', getAllPosts);
+router.get('/:id', getPostById);
+router.post('/', createPost);
+router.put('/:id', updatePost);
+router.delete('/:id', deletePost);
 
-router.get('/posts/:id/comments', async (req, res) => {
+// Comentários
+router.get('/:id/comments', async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -31,7 +33,7 @@ router.get('/posts/:id/comments', async (req, res) => {
   }
 });
 
-router.post('/posts/:id/comments', async (req, res) => {
+router.post('/:id/comments', async (req, res) => {
   const { id } = req.params;
   const { content } = req.body;
 
